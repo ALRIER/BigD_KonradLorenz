@@ -1,0 +1,1906 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/qwertypicass/BigD_KonradLorenz/blob/Camilo_Cruz/Repaso_Primera_Sesi%C3%B3n_CamiloCruz\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# <h1>****Introducción a R & Python.****\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "85NPVDdw7Qvf"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "*****NOTA: para correr el comando \"mágico de R\" en google colab, hará falta que después de instalado se reinicie el kernel, para así poder aplicar los cambios.*****"
+      ],
+      "metadata": {
+        "id": "SPvwDX2x8vkG"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install rpy2==3.5.1"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "lJ1lD9NzA2Uh",
+        "outputId": "37beee02-8305-4797-d76c-85b58b21a15d"
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting rpy2==3.5.1\n",
+            "  Downloading rpy2-3.5.1.tar.gz (201 kB)\n",
+            "\u001b[?25l     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/201.7 kB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K     \u001b[91m━━━━━━━━━━━━\u001b[0m\u001b[90m╺\u001b[0m\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m61.4/201.7 kB\u001b[0m \u001b[31m1.8 MB/s\u001b[0m eta \u001b[36m0:00:01\u001b[0m\r\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m201.7/201.7 kB\u001b[0m \u001b[31m3.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25h  Preparing metadata (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "Requirement already satisfied: cffi>=1.10.0 in /usr/local/lib/python3.10/dist-packages (from rpy2==3.5.1) (1.15.1)\n",
+            "Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from rpy2==3.5.1) (3.1.2)\n",
+            "Requirement already satisfied: pytz in /usr/local/lib/python3.10/dist-packages (from rpy2==3.5.1) (2023.3)\n",
+            "Requirement already satisfied: tzlocal in /usr/local/lib/python3.10/dist-packages (from rpy2==3.5.1) (5.0.1)\n",
+            "Requirement already satisfied: pycparser in /usr/local/lib/python3.10/dist-packages (from cffi>=1.10.0->rpy2==3.5.1) (2.21)\n",
+            "Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2->rpy2==3.5.1) (2.1.3)\n",
+            "Building wheels for collected packages: rpy2\n",
+            "  Building wheel for rpy2 (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for rpy2: filename=rpy2-3.5.1-cp310-cp310-linux_x86_64.whl size=314935 sha256=dad408d72938abe21968c976a21c24d392dc4fd1f4cf5360a08167efeeb36219\n",
+            "  Stored in directory: /root/.cache/pip/wheels/73/a6/ff/4e75dd1ce1cfa2b9a670cbccf6a1e41c553199e9b25f05d953\n",
+            "Successfully built rpy2\n",
+            "Installing collected packages: rpy2\n",
+            "  Attempting uninstall: rpy2\n",
+            "    Found existing installation: rpy2 3.4.2\n",
+            "    Uninstalling rpy2-3.4.2:\n",
+            "      Successfully uninstalled rpy2-3.4.2\n",
+            "Successfully installed rpy2-3.5.1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "id": "7v0Zv39Y7MfV"
+      },
+      "outputs": [],
+      "source": [
+        "#Ruining R scipts inpython\n",
+        "%load_ext rpy2.ipython"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# ***Primero lo primero:***\n",
+        "\n",
+        "Vamos a comenzar con nuestra clase de lectura de código en R y Python.\n",
+        "\n",
+        "Para iniciar, es importante entender qué el código tiene unas báses fundamentales que no podemos dejar de lado. Estos elementos nos ayudarán a comprender el código desde 0.\n",
+        "\n",
+        "Cuándo hablamos de código tenemos elementos básico que hay que identificar dentro del mismo, lo primero es comprender el \"Qué\"... qué estoy haciendo aquí, con qué quiero trabajar.\n",
+        "\n",
+        "Como se había mensionado previamente, los lenguajes de programación trabajan algoritmos que pueden ser de la vida cotidiana o algoritmos matemáticos.\n",
+        "\n",
+        "Bien; si lo pensamos por un momento, la idea de trabajar un lenguaje de programación en un equipo de cómputo será comunicarnos con la maquina mediante el uso de algoritmos matemáticos para así poder introducir en ella todo tipo de algoritmos cotidianos.\n",
+        "\n",
+        "Así, el fin último será lograr que la maquina entienda agoritmos de la vida cotidina y nos ayude a predecir y controlar nuestros sucesos de la vida cotidiana mediante el uso de la matemática.\n",
+        "\n",
+        "Por esta razón, para poder comprender el algoritmo de la maquina se necesita primero tener una base de cómo funciona la maquina y para eso es importante comprender los número:\n",
+        "```\n",
+        "---\n",
+        "title: Números/ Numbers:\n",
+        "\n",
+        "Este es el tipo de datos más usados en R & Python.\n",
+        "-Int: Enteros/Integer\n",
+        "-long: Entero Long/Long Integers (&)\n",
+        "-float: Punto flotante/float point numbers\n",
+        "-complex: complejos\n",
+        "-bool: boleano.\n",
+        "---\n",
+        "\n",
+        "```\n",
+        "##-***Int***:\n",
+        "enteros --> 34 , 23, 1, 100, -100, -1, 0.\n",
+        "\n",
+        "-***Long***: entero long --> números enteros muy largos que se almacentan en formatos de 32 bits y su denominación es la \"&\".\n",
+        "\n",
+        "##-***Float***:\n",
+        "Un entero de punto flotante es un número acompañado de una fracción decimal y pueden ser negativos o positivos. 0.23, 0.55, -2234.2, -1.2.\n",
+        "\n",
+        "##-***Complejos***:\n",
+        "son números que contienen una parte \"imaginaria\" llamara \"i\" que acompañan otro número para hacer referencia a una operación matemática en especial.\"i = (√-1)\"\n",
+        "\n",
+        "##-***Bool***:\n",
+        "los valores boleanos son valores de verdad o falsedad, así estos tendrán únicamente 2 valores \"TRUE/FALSE\" y servirán para asignar instrucciones al codigo (ej: si quiero que algo esté presente en el código puedo asignarle un =TRUE o si deseo que no esté presente le puedo asignar un = FALSE) o se puede usar para evidenciar si algo es real o no en el código mediante el uso de operadores condicionales que veremos más adelante. Por ahora es importante entender que el computador podría respnderme TRUE/FALSE dependiendo de si algo está o no presente en el mis datos.\n",
+        "\n",
+        "ejemplo"
+      ],
+      "metadata": {
+        "id": "Si79QGZDBjwr"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "a=2\n",
+        "#acabo de decirle al computador que a es igual al valor 2\n",
+        "#Ahora le pregunto al computador sí a es mayor que 4\n",
+        "a>4"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "QUTiy0dZBVrK",
+        "outputId": "524e031e-0e05-4f8a-9078-e5db51931211"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] FALSE\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "b=6 #b tiene el valor de 6 y le hago preguntas al sistema para ver si se entiende bien o no\n",
+        "\n",
+        "b<7\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "RCDlOr0ZWruK",
+        "outputId": "053f3165-9ab1-4bf4-b264-ae68afd8c361",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] TRUE\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "c=100 #ahora la variable c tiene el valor de 100\n",
+        "\n",
+        "c>99\n"
+      ],
+      "metadata": {
+        "id": "hVcf0-2wYmWz",
+        "outputId": "e2ffe183-f058-40c0-c579-f18a5ba22210",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] TRUE\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Como vemos el computador responde \"FALSO\" a esa afirmación.\n",
+        "\n",
+        "Ahora, vamos a iniciar con lo simple:::\n",
+        "_____________________________\n",
+        "***SUMA signo +***"
+      ],
+      "metadata": {
+        "id": "H8WUBwvGBv7f"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "1+1"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "PP9fnLqRBs3H",
+        "outputId": "33837fa9-31bd-428b-9a34-f50e620b5064"
+      },
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 20
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "las operaciones numéricas aplican para cualquier lenguaje de programación que vaya a usar :)"
+      ],
+      "metadata": {
+        "id": "6zqjclz-D0ld"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo suma en R\n",
+        "# Puedo usar números enteros y flotantes para las operaciones\n",
+        "%%R\n",
+        "\n",
+        "3.14 + 8\n"
+      ],
+      "metadata": {
+        "id": "DG_CQVXUZGaV",
+        "outputId": "4308a57f-49f3-433c-b08e-6aa6dc334903",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 11.14\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en Python\n",
+        "# También usando números enteros y flotantes para las operaciones\n",
+        "\n",
+        "5.16 + 3.48"
+      ],
+      "metadata": {
+        "id": "JsocfqI7ZoJ4",
+        "outputId": "743ed759-b873-44b0-fb44-a500854a869e",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "8.64"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 26
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "______________________________\n",
+        "***RESTA\n",
+        "signo -***"
+      ],
+      "metadata": {
+        "id": "vzeXr_dfB7YA"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "10-9"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Jye0KVyoB6Pl",
+        "outputId": "883ccce6-17e0-4e99-f308-0433d992438a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en R\n",
+        "%%R\n",
+        "134 - 45.987"
+      ],
+      "metadata": {
+        "id": "kgkefzOlaN8z",
+        "outputId": "601da9f5-abc0-4514-8516-517468a16648",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 88.013\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en python\n",
+        "\n",
+        "1238 - 142.9"
+      ],
+      "metadata": {
+        "id": "V1J8l1u9aYo8",
+        "outputId": "d00ae8be-80b6-495f-9bdd-1aacbe8a4d29",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1095.1"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 30
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "____________________________\n",
+        "***MULTIPLICACIÓN\n",
+        "signo ****"
+      ],
+      "metadata": {
+        "id": "D-AsWTkgB_xF"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "2*3"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CM2HlXyiCI4j",
+        "outputId": "bcb12645-6071-4a29-94d7-bba18468e88d"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "6"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en R\n",
+        "%%R\n",
+        "13 * 45.4\n"
+      ],
+      "metadata": {
+        "id": "wZk5GQ8PbTbG",
+        "outputId": "6d21832b-fbf4-4aca-f9dc-55dc84fcb75e",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 32,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 590.2\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en python\n",
+        "\n",
+        "134 * 15.7"
+      ],
+      "metadata": {
+        "id": "MTziFzLjbgfp",
+        "outputId": "e2a11347-c33e-47c4-f6ff-f765a209305a",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 33,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2103.7999999999997"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 33
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "____________________________\n",
+        "***POTENCIACIÓN\n",
+        "signo *****"
+      ],
+      "metadata": {
+        "id": "RciagNovCOEE"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Esto es igual\n",
+        "2*2*2*2"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "1PRXu7rlCV22",
+        "outputId": "e6735d24-f319-40f8-e21c-b9014fe25b64"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "16"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Qué eso, pero esto, es correctamente escrito.\n",
+        "2**4"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "7DUn4tlBCQ4K",
+        "outputId": "f73330df-ddd6-4b91-948f-0ceb398b50b6"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "16"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en R\n",
+        "%%R\n",
+        "4.4*4.4*4.4\n"
+      ],
+      "metadata": {
+        "id": "UtyioRmUbuDW",
+        "outputId": "544fce1b-bcb7-4c21-f609-731de67b1503",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 39,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 85.184\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "4.4**3"
+      ],
+      "metadata": {
+        "id": "_zzq9lb-by2q",
+        "outputId": "d181873b-f0f1-450a-9358-acb1c1872724",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 85.184\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en Python\n",
+        "10*10*10*10*10"
+      ],
+      "metadata": {
+        "id": "ESpxt1Reb3q4",
+        "outputId": "fbd4683f-337f-4cc8-a83b-7b3193068925",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 37,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "100000"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 37
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "10**5"
+      ],
+      "metadata": {
+        "id": "oNmXWl4Wb78r",
+        "outputId": "79034381-7b01-42f2-91b1-157a62a2021c",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 38,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "100000"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 38
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "___________________________\n",
+        "***DIVICIÓN/MODULO\n",
+        "signo %***"
+      ],
+      "metadata": {
+        "id": "oDHD96v9Cavk"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "4%2"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "daG4QOIVCaRT",
+        "outputId": "0185508c-6f98-40a3-ddb8-889b931f3a9d"
+      },
+      "execution_count": 41,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 41
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo código en R\n",
+        "\n",
+        "%%R\n",
+        "10.3 / 3.5"
+      ],
+      "metadata": {
+        "id": "0C8Js95hc0Hi",
+        "outputId": "10f50110-4d84-4baf-fd80-5b610e1f5168",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 48,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 2.942857\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en Python\n",
+        "# el operador matemático es / no %\n",
+        "\n",
+        "101.6 / 38.5"
+      ],
+      "metadata": {
+        "id": "56ND45tVdOVB",
+        "outputId": "5f1655f6-01a9-48cc-824a-1305a6a9c50b",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 49,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2.638961038961039"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 49
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "PRIMACIA DE OPERACIONES\n",
+        "```\n",
+        "2+3*5+5\n",
+        "```\n",
+        "--> En este caso priman las operaciones de potenciación, luego la multipricación, la división, la resta y luego la suma... en este caso primará\n",
+        "```\n",
+        "3*5\n",
+        "```\n",
+        ", luego le sumo el 2 y luego 5."
+      ],
+      "metadata": {
+        "id": "-Xysm9WFCjhu"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "2+3*5+5"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jU3SHCsiClI6",
+        "outputId": "50acc94c-c99b-4226-98cf-a94885ee9a12"
+      },
+      "execution_count": 50,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "22"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 50
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo R\n",
+        "%%R\n",
+        "8*5.2 + 13.5 -4.3\n",
+        "\n",
+        "# En este caso primero se opera la multiplicación, después la suma y por último la resta\n",
+        "# 8 * 5.2 = 41.6 | Después le suma + 13.5 = 55.1 | Por último le resta 4.3 = 50.8"
+      ],
+      "metadata": {
+        "id": "matSK2u1fDNy",
+        "outputId": "4a129180-594b-4ecf-cffb-b05c280c35e0",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 53,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 50.8\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en Python\n",
+        "\n",
+        "8 * 5.2 + 13.5 - 4.3"
+      ],
+      "metadata": {
+        "id": "tm4unL2_f3jU",
+        "outputId": "4b6d5a5a-d29a-41ea-f1e6-0e8c8cd758e6",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 54,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "50.800000000000004"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 54
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Si quiero que el orden del resultado se vea afectado, entonces deberé usar los paréntesis para alterar el orden de los resultados."
+      ],
+      "metadata": {
+        "id": "gCxDRvcVCp-A"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "(2+3)*(5+5)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NubdDDx9Cqes",
+        "outputId": "7565ccaa-fc48-47a9-e79a-1b01f5e8d621"
+      },
+      "execution_count": 57,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "50"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 57
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a = 2\n",
+        "b = 3\n",
+        "c = a + b\n",
+        "d = a - b\n",
+        "e = a * b\n",
+        "f = a / b"
+      ],
+      "metadata": {
+        "id": "B0iN8fvTGHqR"
+      },
+      "execution_count": 58,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(d, f)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "G9MLzGbcGSlU",
+        "outputId": "bd4426ee-cfd0-4491-ba07-c4d447e3f326"
+      },
+      "execution_count": 72,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-1 0.6666666666666666\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Ejemplo en R\n",
+        "# En el caso de R parece que no se puede imprimir dos resultados en la misma línea, posiblemente se pueda hacer\n",
+        "# Dos diferentes\n",
+        "# Si escribo Print con la P en mayúscula sale un error\n",
+        "# Si defino la variable en mayúscula también debo imprimirla en mayúscula\n",
+        "\n",
+        "%%R\n",
+        "\n",
+        "a1 = 10\n",
+        "b2 = 20\n",
+        "c3 = 30\n",
+        "\n",
+        "D = a1 + a1\n",
+        "E = a1 / b2\n",
+        "F = b2 * c3\n",
+        "G = a1 ** a1\n",
+        "\n",
+        "print(F)\n",
+        "print(E)\n",
+        "print(G)\n",
+        "print(F)\n"
+      ],
+      "metadata": {
+        "id": "WLotJPqbhhfJ",
+        "outputId": "ef20e54a-687e-4aeb-fbe7-27db539a195a",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 83,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 600\n",
+            "[1] 0.5\n",
+            "[1] 1e+10\n",
+            "[1] 600\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "z = 30\n",
+        "x = 20.9\n",
+        "c = 13.5\n",
+        "v = 4\n",
+        "\n",
+        "a = z * x + v\n",
+        "\n",
+        "print(a)"
+      ],
+      "metadata": {
+        "id": "5qLp0jn6jd0I",
+        "outputId": "4fc88400-e459-453a-cd48-dbd8784909a6",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 89,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "631.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# ***__________Asignación de valores numéricos a una variable.***\n",
+        "\n",
+        "Es importante recordar que ***no deberé asignar un nombre de una variable con un número primero o un símbolo*** ya que ni python ni R van a poder entender esta asignación de variables y será un trabajo perdido.\n",
+        "\n",
+        "Si rerodamos el ejemplo de arriba, sobre los valores boleanos, dijimos que yo podía asignar valores numéricos a algunas letras, en este caso dije que a sería igual a 2"
+      ],
+      "metadata": {
+        "id": "-_lbBxgrCujC"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "a=2\n",
+        "a"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "3Dqg5liYC65o",
+        "outputId": "7ac08840-f8bf-43cf-d619-d249a2d6ab7e"
+      },
+      "execution_count": 87,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 87
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Bien, esto se conoce como asignación de una variable y estaré diciendole a R o a Python que esta letra será igual a una variable que contendrá dentro de sí un valor. ¿Cuál valor?, bueno el que yo desee asignarle.\n",
+        "\n",
+        "En alfabetización digital este procedimiento se lée como:\n",
+        "\n",
+        "*Estoy asignando un valor de 2 a la variable 2, o, asignaré 2 a una variable llamada a*\n",
+        " otros ejemplos de asignación pueden ser."
+      ],
+      "metadata": {
+        "id": "O5YBT4P6DBO9"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a=2\n",
+        "perro= 230495\n",
+        "#puedo asignar variables más complejas, por ejemplo\n",
+        "suma= 2+2\n",
+        "resta=100-10\n",
+        "perro + suma\n"
+      ],
+      "metadata": {
+        "id": "IyLXEof-DDkF",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b232a860-e952-467b-e89c-cff17a6f6aa2"
+      },
+      "execution_count": 91,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "230499"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 91
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Una vez haya creado una variale puedo llamar su resultado o puedo llamar el valor que esta contenga dentro de sí.\n",
+        "\n",
+        "En python y R existe la orden print() que imprimirá en pantalla lo que sea que esté llamando, así"
+      ],
+      "metadata": {
+        "id": "nyltH8o5DTyo"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(a)\n",
+        "print(perro)\n",
+        "print(suma)\n",
+        "print(resta)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "j8lArMm3DGpn",
+        "outputId": "066966d8-4edd-4774-de7b-cb9ea5389226"
+      },
+      "execution_count": 92,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "2\n",
+            "230495\n",
+            "4\n",
+            "90\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Como vemos, el lenguaje lo que hace es regresar los valores correspondientes a la variable que previamente he creado.\n",
+        "\n",
+        "Dentro de las hojas de trabajo de google colab y también dentro del entorno de Rstudio cloud, se puede practicar cualquiera de estos enunciados que hemos visto aquí. Mi recomendación es practicar las primeras sencencias de lectura de código para poder tener práctica en el proceso."
+      ],
+      "metadata": {
+        "id": "4DYqYfnFDcON"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# _________________________________Operaciones con variables\n",
+        "\n",
+        "Tomemos por ejemplo una formula simple\n",
+        "y= a+bx"
+      ],
+      "metadata": {
+        "id": "XZZOSq5BDgMP"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "a=2\n",
+        "b=3\n",
+        "x=4"
+      ],
+      "metadata": {
+        "id": "wtK9Wc6mXBOt"
+      },
+      "execution_count": 93,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Así, ya he definido todos los valores, ahora voy a proceder a despejar la formula, o más bien, a permitir que el lenguaje de programación lo haga por mi de forma intuitiva. Para eso necesito escribirlos en una forma en a que el lenguaje deprogramación me pueda entender coherentemente:"
+      ],
+      "metadata": {
+        "id": "cFhEO-03XKVW"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "y= a+(b*x)"
+      ],
+      "metadata": {
+        "id": "UdX_Z7ofXK7u"
+      },
+      "execution_count": 94,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "bien ahora llamaré el valor de y,"
+      ],
+      "metadata": {
+        "id": "mfti24z7XXST"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "print(y)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "c8zsgdNtXYxj",
+        "outputId": "8576c00e-43db-4057-bc8e-f23161727ede"
+      },
+      "execution_count": 95,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 14\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "también puedo simplemente llamar mi valor"
+      ],
+      "metadata": {
+        "id": "2ppeQieLXfbT"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "y"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "D9NDxCFkXgy3",
+        "outputId": "3db4ede5-a07e-4bf8-9e94-74f014cc67e8"
+      },
+      "execution_count": 96,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] 14\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Ahora vamos un poco más allá en el código.\n",
+        "\n",
+        "Aquí inicia lo bueno de la clase, vamos a comenzar a leer código de R y Python... Leamos la siguiente línea de código:\n",
+        "\n",
+        "se lee así:\n",
+        "*A una variable llamada formula que contendrá dentro de sí las variables y=a+bx*"
+      ],
+      "metadata": {
+        "id": "WVXMky6UXlhw"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "formula=y=(a+(b*x))"
+      ],
+      "metadata": {
+        "id": "AUJI7R7VXpxP"
+      },
+      "execution_count": 97,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Cabe aclarar que formula es un nombre que me he inventado... tu podrías llamar a tu variable como quieras... a, perro, casa, maría, reg, o como quieras.\n",
+        "\n",
+        "***-------------->Otro tipo de variables y asignaciones***\n",
+        "\n",
+        "Bien, revisemos ahora algunos elementos adicionales.\n",
+        "\n",
+        "***_______________________________Cadenas (Strings)***\n",
+        "Estos almacenan caracteres, como las letras o el texto.\n",
+        "\n",
+        "Ni Python ni R van a entender un string como un número, sin importar si dentro hay uno...\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "warLpFaSXusu"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#En pyton\n",
+        "'mi mama me mima, mi mama me ama'\n",
+        "\"mi mama me mima, mi mama me ama\""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        },
+        "id": "2av2meY2XzSI",
+        "outputId": "459e508b-5fa4-42f1-93a9-223910e03065"
+      },
+      "execution_count": 98,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'mi mama me mima, mi mama me ama'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 98
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\"Hola, hola y hola\""
+      ],
+      "metadata": {
+        "id": "8JGIhK6LmVCu",
+        "outputId": "2f8e3fcd-6e90-4ada-b6d0-6eb8d5253a07",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        }
+      },
+      "execution_count": 100,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'Hola, hola y hola'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 100
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "#En R\n",
+        "'mi mama me mima, mi mama me ama'\n",
+        "\"mi mama me mima, mi mama me ama\""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "C399k3jCX-iR",
+        "outputId": "ae3ea7b9-ca75-493b-9ed1-6380164a6f5f"
+      },
+      "execution_count": 99,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] \"mi mama me mima, mi mama me ama\"\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "\"Sí sumo 3 + 2 me va a dar como resultado 5\"\n",
+        "\n",
+        "# Así tenga números en medio de las comillas, el programa lo sigue leyendo como Strings"
+      ],
+      "metadata": {
+        "id": "ZqfocWlnmr-V",
+        "outputId": "f8890046-2e1d-4e04-a844-fb772bb4fd6f",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 103,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] \"Sí sumo 3 + 2 me va a dar como resultado 5\"\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "En ámbos lenguajes de programación se pueden usar con comillas sencillas o con comillas dobles.\n",
+        "\n",
+        "```\n",
+        "'mi mama me mima, mi mama me ama\n",
+        "\n",
+        "---> SyntaxError: EOL while scanning string literal (<string>, line 1)\n",
+        "```\n",
+        "\n",
+        "\n",
+        "Como vemos, en ámbos lenguajes de programación, si yo no cierro las comillas, entonces se generará un error, porque el lenguaje entenderá que deseo seguir escribiendo una línea de caracteres y que la orden quedó imcompleta.\n",
+        "\n",
+        "Es importante acostumbrarnos poco a poco a los errores, entenderlos y comprenderlos.\n",
+        "\n",
+        "Ya veremos algunas clases en el curso dedicadas a los tipos de errores más comunes.\n",
+        "\n",
+        "Ahora bien, yo puedo indexar los elementos de una cadena dentro de una variable."
+      ],
+      "metadata": {
+        "id": "hWrTnhfHYHAx"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a='mi mama me mima, mi mama me ama'\n",
+        "b=\"mi mama me mima, mi mama me ama\""
+      ],
+      "metadata": {
+        "id": "ighsSZEpYHw-"
+      },
+      "execution_count": 105,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Y será necesario llamar a la variable para ver su contenido"
+      ],
+      "metadata": {
+        "id": "OZikgGu5YPxJ"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(a)\n",
+        "print(b)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "flbIzbwMYQ7I",
+        "outputId": "40ea1bf1-7edc-41e7-b44d-7f6c2bb0c02b"
+      },
+      "execution_count": 106,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "mi mama me mima, mi mama me ama\n",
+            "mi mama me mima, mi mama me ama\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Como se anotó prevamente, es importante recordar que el contenido dentro de un string no es comprendido como un número, sin importas si se contiene o no un número dentro del string..."
+      ],
+      "metadata": {
+        "id": "SptaAZ-aYSwV"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a=\" 343353534 + 34353535\""
+      ],
+      "metadata": {
+        "id": "hfdpFFbvYUKo"
+      },
+      "execution_count": 107,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "En este caso mi string tiene \" 343353534 + 34353535\" este valor, pero Python no entiende que esto son números sino ***caracteres*** y los va a tratar como tal, entonces si le pido que me regrese el valor."
+      ],
+      "metadata": {
+        "id": "d5Pqn1IHYXFt"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        },
+        "id": "SWw2xIIHYeXa",
+        "outputId": "865f38c3-1723-4eba-faa2-47c6f161a1b0"
+      },
+      "execution_count": 108,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "' 343353534 + 34353535'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 108
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Me va a dar como resultado el string que acabo de insertar de forma textual... esto ya que el lenguaje asume que toda la cadena está compuesta de caracteres, incluso los números serán tratados como tal.\n",
+        "\n",
+        "*importante: en los strings, los espacios vacíos, son contados como caracteres, asíq ue hay que tneer cuidado con dejar espacios vacíos porque el lenguaje igual los contará como caracteres y en algunos casos como minería de datos, si lo que busco es contar el número de palabras o letras podría alterar artificialmente mis resultados... bueno es algo de tratamiento de datos que ya veremos más adelante*\n",
+        "\n",
+        "Bien, ahora vamos a revisar agunos elementos de los strings.\n",
+        "\n",
+        "recuerdan mi string a?, bueno aquí está de nuevo"
+      ],
+      "metadata": {
+        "id": "NAIQpT-RYiHB"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a=\" 343353534 + 34353535\"\n",
+        "a1=\" \"\n",
+        "a2=\"3\"\n",
+        "a3=\"4\"\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "3U-xV-pCYlQQ"
+      },
+      "execution_count": 109,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Sí le pido  python que me traiga el valor 0 del string, entonces él me contará los valores desde el inicio y traerá el valor ubicado en dicha posición... o sea, el espacio vacío que previamente comentamos."
+      ],
+      "metadata": {
+        "id": "UJgy8OzNYnLN"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a[9]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        },
+        "id": "D2__Z7lRYooW",
+        "outputId": "fc11fc24-876b-49b8-d488-ba3b764fb1b5"
+      },
+      "execution_count": 113,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'4'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 113
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Sin embargo, si le pido que me traiga el valor 1, python me traerá el valor 3, que en este caso será el valor que corresponde a dicho espacio en la cadena."
+      ],
+      "metadata": {
+        "id": "2l_vVGe7YsBD"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a[1]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        },
+        "id": "ykcIfgoJYueF",
+        "outputId": "5fe1c63c-1c12-464e-dd88-36551402054f"
+      },
+      "execution_count": 114,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'3'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 114
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "En R hay unas sutiles diferencias con el tema de los strings y es que en R la cadena de string se entiende como un elemento compuesto, así si declaro a"
+      ],
+      "metadata": {
+        "id": "DhVChwbRYwTf"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "a=\" 343353534 + 34353535\""
+      ],
+      "metadata": {
+        "id": "3RkVMqaIYx2P"
+      },
+      "execution_count": 115,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "y luego le pido a R que llame mi valor 0"
+      ],
+      "metadata": {
+        "id": "pMqawWZFY1kU"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "a[1]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "QnOaFc4-Y7yN",
+        "outputId": "b500498a-1a22-41b7-8573-93628f42d8e4"
+      },
+      "execution_count": 117,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] \" 343353534 + 34353535\"\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "R me dirá que el valor 0 del caracter 0 es 0 (valga la redundancia)\n",
+        "Esto se debe a que R entiende que el string que acabo de generar tiene 1 solo valor compuesto por toda una cadena de caracteres, así, si llamo el valor 1 de a"
+      ],
+      "metadata": {
+        "id": "3tDX9GDhY_LV"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%R\n",
+        "a[1]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "9AvL53STZAUE",
+        "outputId": "7d92e87b-f096-4c22-f972-d0e4f37eb46a"
+      },
+      "execution_count": 118,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] \" 343353534 + 34353535\"\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "R me dará como resultado todo mi string que contiene 1 solo valor \" 343353534 + 34353535\"\n",
+        "\n",
+        "*diferencias entre lenguajes*\n",
+        "\n",
+        "Ahora, en python puedo pedirle al código que me traiga los valores de a que están ubicados desde 0 hasta el 9"
+      ],
+      "metadata": {
+        "id": "0WvXFvzzZEdV"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a=\" 343353534 + 34353535\""
+      ],
+      "metadata": {
+        "id": "l9G56zGP1HRK"
+      },
+      "execution_count": 119,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a[0:9]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        },
+        "id": "Y5EqwMtOZGIN",
+        "outputId": "b0aff9e1-0265-411d-cc76-d12c854b8527"
+      },
+      "execution_count": 120,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "' 34335353'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 120
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "También podría pedirle que salte de a 2 espacios\n",
+        "pero para entenderlo más fácil definamos otra variable llamara \"todos mis amigos están reunidos hoy en la cada de Juan\""
+      ],
+      "metadata": {
+        "id": "7a92-S4BZIrL"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a=\"todos mis amigos están reunidos hoy en la cada de Juan\""
+      ],
+      "metadata": {
+        "id": "FyqVqvGsZKQ6"
+      },
+      "execution_count": 121,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Ahora pediré que llame caracteres saltando de a 2 espacios."
+      ],
+      "metadata": {
+        "id": "1cuzKzwKZNH3"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a[0::2]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        },
+        "id": "_GQit_LSZOWO",
+        "outputId": "ac4f56ff-2bcd-4403-e273-d63d6db6d5f0"
+      },
+      "execution_count": 122,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'tdsmsaio sá endshye acd eJa'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 122
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Así el código cada dós caracteres llama el valor que corresponde."
+      ],
+      "metadata": {
+        "id": "ha341k73ZQia"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Repaso primera sesión\n",
+        "Camilo Andrés Cruz P."
+      ],
+      "metadata": {
+        "id": "oM-1YhLQoq6y"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "1eSgygYVoqjX"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
